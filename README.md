@@ -11,4 +11,6 @@ COPY nginx.conf $CONF_DIR/
 
 RUN $APP_DIR/post-install.sh
 
+EXPOSE 8080
+USER $APP_USER
 CMD ["nginx", "-c", "$CONF_DIR/nginx.conf"]
