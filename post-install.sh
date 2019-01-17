@@ -5,7 +5,7 @@ set -e
 set -o pipefail
 
 # Do a security scan and remove it
-$APP_DIR/secscan.sh && rm "$APP_DIR/secscan.sh"
+$APP_DIR/secscan.sh
 
 # remove apk package manager
 find / -type f -iname '*apk*' -xdev -delete
