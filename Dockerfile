@@ -97,11 +97,8 @@ RUN rm -f /etc/fstab
 # Remove any symlinks that we broke during previous steps
 RUN find /bin /etc /lib /sbin /usr -xdev -type l -exec test ! -e {} \; -delete
 
-# add-in security scan
-COPY secscan.sh $APP_DIR/
-
 # add-in post installation file for permissions
 COPY post-install.sh $APP_DIR/
-RUN chmod 500 $APP_DIR/post-install.sh $APP_DIR/secscan.sh
+RUN chmod 500 $APP_DIR/post-install.sh
 
 WORKDIR $APP_DIR

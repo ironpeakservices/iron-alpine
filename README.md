@@ -1,16 +1,21 @@
 # hardened-alpine
 Hardened alpine linux baseimage for Docker.
 
+## How is this different?
+- 
+
 ## Example
 ```
-FROM hardened-alpine:latest
-RUN apk add --no-cache nginx \
-  && rm -rf /etc/nginx /var/cache/nginx /var/log/nginx
+# download this repo
+git clone https://github.com/hazcod/hardened-alpine
+cd hardened-alpine/
 
-COPY nginx.conf $CONF_DIR/
+# build our baseimage
+docker build -t hardened-alpine .
 
-RUN $APP_DIR/post-install.sh
+# build our example
+docker build -t hardened-nginx example/
 
-EXPOSE 8080
-USER $APP_USER
-CMD ["nginx", "-c", "$CONF_DIR/nginx.conf"]
+# run our example
+docker run -ti -p 80:8080 -p 443:8443 hardened-nginx
+```
