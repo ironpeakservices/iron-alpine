@@ -2,7 +2,22 @@
 Hardened alpine linux baseimage for Docker.
 
 ## How is this different?
-- 
+- ca-certificates included
+- /app for everything app-related; /app/conf, /app/tmp, /app/data
+- no interactive shells for users
+- removed unneccessary accounts, only 'app' and 'root' users
+- removed crontabs
+- removed dangerous commands and utilities
+- strictened permissions on system files and directories
+- removed temporary shadow/passwd/group
+- removed suid/guid files
+- removed init scripts
+- removed kernel tunables
+- removed /root/
+- removed fstab
+- post-install.sh:
+	- removes apk manager after installation
+	- sets permissions on /app after installation
 
 ## Example
 ```
