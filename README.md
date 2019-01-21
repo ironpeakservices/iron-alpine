@@ -34,3 +34,7 @@ docker build -t hardened-nginx example/
 # run our example
 docker run -ti -p 80:8080 -p 443:8443 hardened-nginx
 ```
+
+## Additional
+If you want, you can also enable vulnerability scanning during your build (for free).
+Take a look at https://github.com/aquasecurity/microscanner
