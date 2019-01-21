@@ -17,10 +17,6 @@ ENV CONF_DIR "$APP_DIR/conf"
 # Update base system
 RUN apk --no-cache upgrade && apk add --no-cache ca-certificates
 
-# Add our security scanner
-RUN wget -O /microscanner https://get.aquasec.com/microscanner \
-  && chmod +x /microscanner
-
 # Add custom user and setup home directory
 RUN adduser -s /bin/true -u 1000 -D -h $APP_DIR $APP_USER \
   && mkdir "$DATA_DIR" "$CONF_DIR" \
