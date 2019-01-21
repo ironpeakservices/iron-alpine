@@ -1,4 +1,4 @@
-FROM ha:latest
+FROM hardened-alpine:latest
 RUN apk add --no-cache nginx \
   && rm -rf /etc/nginx /var/cache/nginx /var/log/nginx
 
