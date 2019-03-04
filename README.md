@@ -1,6 +1,8 @@
 # hardened-alpine
 Hardened alpine linux baseimage for Docker.
 
+Note: If you use Golang, build statically and use a scratch image. If you are using Java/Python/NodeJS/dotnet, use a [distroless image](https://github.com/GoogleContainerTools/distroless) instead.
+
 ## How is this different?
 - ca-certificates included
 - /app for everything app-related; /app/conf, /app/tmp, /app/data
