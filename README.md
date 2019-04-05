@@ -1,4 +1,4 @@
-# ironpeakservices/hardened-alpine:
+# ironpeakservices/hardened-alpine
 Hardened alpine linux baseimage for Docker.
 
 Note: If you use Golang, build statically and use a scratch image. If you are using Java/Python/NodeJS/dotnet, use a [distroless image](https://github.com/GoogleContainerTools/distroless) instead.
