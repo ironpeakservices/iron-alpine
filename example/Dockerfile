@@ -1,4 +1,4 @@
-FROM hardened-alpine:latest
+FROM ironpeakservices/hardened-alpine
 RUN apk add --no-cache nginx \
   && rm -rf /etc/nginx /var/cache/nginx /var/log/nginx
 
