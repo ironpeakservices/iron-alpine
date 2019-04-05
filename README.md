@@ -1,7 +1,9 @@
-# hardened-alpine
+# ironpeakservices/hardened-alpine:
 Hardened alpine linux baseimage for Docker.
 
 Note: If you use Golang, build statically and use a scratch image. If you are using Java/Python/NodeJS/dotnet, use a [distroless image](https://github.com/GoogleContainerTools/distroless) instead.
+
+Check it out [on Docker Hub](https://hub.docker.com/r/ironpeakservices/hardened-alpine)!
 
 ## How is this different?
 - ca-certificates included
@@ -22,20 +24,9 @@ Note: If you use Golang, build statically and use a scratch image. If you are us
 	- sets permissions on /app after installation
 
 ## Example
-```
-# download this repo
-git clone https://github.com/hazcod/hardened-alpine
-cd hardened-alpine/
+`docker pull ironpeakservices/hardened-alpine`
 
-# build our baseimage
-docker build -t hardened-alpine .
-
-# build our example
-docker build -t hardened-nginx example/
-
-# run our example
-docker run -ti -p 80:8080 -p 443:8443 hardened-nginx
-```
+See [the nginx example](example/).
 
 ## Additional
 If you want, you can also enable vulnerability scanning during your build (for free).
