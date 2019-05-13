@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:3.9.4
 ENV alpine_version="v3.8"
 
 # ensure we only use apk repositories over HTTPS (altough APK contain an embedded signature)
