@@ -1,9 +1,8 @@
 FROM alpine:3.9.4
-ENV alpine_version="v3.8"
 
 # ensure we only use apk repositories over HTTPS (altough APK contain an embedded signature)
-RUN echo "https://alpine.global.ssl.fastly.net/alpine/${alpine_version}/main" > /etc/apk/repositories \
-	&& echo "https://alpine.global.ssl.fastly.net/alpine/${alpine_version}/community" >> /etc/apk/repositories
+RUN echo "https://alpine.global.ssl.fastly.net/alpine/v$(cat /etc/alpine-release | cut -d . -f 1,2)/main" > /etc/apk/repositories \
+	&& echo "https://alpine.global.ssl.fastly.net/alpine/v$(cat /etc/alpine-release | cut -d . -f 1,2)/community" >> /etc/apk/repositories
 
 # The user the app should run as
 ENV APP_USER=app
