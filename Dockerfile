@@ -1,4 +1,4 @@
-FROM alpine:3.9.4
+FROM alpine:3.10.0
 
 # ensure we only use apk repositories over HTTPS (altough APK contain an embedded signature)
 RUN echo "https://alpine.global.ssl.fastly.net/alpine/v$(cat /etc/alpine-release | cut -d . -f 1,2)/main" > /etc/apk/repositories \
