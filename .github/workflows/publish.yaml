@@ -1,0 +1,24 @@
+on:
+  push:
+    branches:
+    - master
+
+name: push image
+jobs:
+  dockerpush:
+    name: docker build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: extract tag
+      id: vars
+      run: echo ::set-output name=alpine_version::$(grep '^FROM alpine' Dockerfile  | cut -d ' ' -f 2 | cut -d ':' -f 2)
+    - run: echo "Pushing version ${{ steps.vars.outputs.alpine_version }}"
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        registry: docker.pkg.github.com
+        name: "ironpeakservices/iron-alpine/iron-alpine:${{ steps.vars.outputs.alpine_version }}"
+        username: hazcod
+        password: ${{ secrets.GITHUB_TOKEN }}
+
