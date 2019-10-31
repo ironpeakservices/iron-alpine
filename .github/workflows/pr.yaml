@@ -37,6 +37,6 @@ jobs:
         path: vulndb/
         key: ${{ runner.os }}-vulndb
     - name: run security scan
-      run: docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$(pwd)/vulndb/"":/root/.cache/ aquasec/trivy image
+      run: docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$(pwd)/vulndb/":/root/.cache/ aquasec/trivy image
 
 
