@@ -1,9 +1,10 @@
 # ironpeakservices/hardened-alpine
 Hardened alpine linux baseimage for Docker.
 
-Note: If you use Golang, build statically and use a scratch image. If you are using Java/Python/NodeJS/dotnet, use a [distroless image](https://github.com/GoogleContainerTools/distroless) instead.
+Note: If you use Golang, build statically and use [iron-scratch](https://github.com/ironpeakservices/iron-scratch).
+If you are using Java/Python/NodeJS/dotnet, use a [distroless image](https://github.com/GoogleContainerTools/distroless) instead.
 
-Check it out [on Docker Hub](https://hub.docker.com/r/ironpeakservices/hardened-alpine)!
+`docker pull docker.pkg.github.com/ironpeakservices/iron-alpine/iron-alpine:3.10.3`
 
 ## How is this different?
 - ca-certificates included
@@ -27,6 +28,9 @@ Check it out [on Docker Hub](https://hub.docker.com/r/ironpeakservices/hardened-
 `docker pull ironpeakservices/hardened-alpine`
 
 See [the nginx example](example/).
+
+## Update policy
+Updates to the official alpine docker image are automatically created as a pull request and trigger linting & a docker build. When those checks complete without errors, a merge into master will trigger a deploy with the same version to packages.
 
 ## Additional
 If you want, you can also enable vulnerability scanning during your build (for free).
