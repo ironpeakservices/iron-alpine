@@ -1,6 +1,6 @@
 
 on: pull_request
-name: dockerfile linting
+name: pull request checks
 jobs:
   dockerfilelint:
     name: dockerfile lint
@@ -35,13 +35,14 @@ jobs:
       uses: actions/cache@preview
       with:
         path: vulndb/
-        key: ${{ runner.os }}-vulndb
+        key: trivy-vulndb
     - name: run security scan
       run: |
         docker run --rm \
           -v /var/run/docker.sock:/var/run/docker.sock \
           -v "$(pwd)/vulndb/":/root/.cache/ \
           aquasec/trivy --severity HIGH,CRITICAL,MEDIUM --no-progress --auto-refresh --ignore-unfixed --exit-code 1 --cache-dir /root/.cache/ image
+        ls -alh . vulndb/
 
 
 
