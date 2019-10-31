@@ -42,8 +42,7 @@ jobs:
           -v /var/run/docker.sock:/var/run/docker.sock \
           -v "$(pwd)/vulndb/":/root/.cache/ \
           aquasec/trivy --severity HIGH,CRITICAL,MEDIUM --no-progress --auto-refresh --ignore-unfixed --exit-code 1 --cache-dir /root/.cache/ image
-        docker run -ti --rm -v "$(pwd)/vulndb/":/root/.cache/ alpine:latest /bin/bash -c "chmod 777 -R /root/.cache/"
-        ls -alh . vulndb/
+        docker run --rm -v "$(pwd)/vulndb/":/root/.cache/ alpine:latest chmod 777 -R /root/.cache/
 
 
 
