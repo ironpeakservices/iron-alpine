@@ -21,6 +21,22 @@ jobs:
     - name: extract tag
       id: vars
       run: echo ::set-output name=alpine_version::$(grep '^FROM alpine' Dockerfile  | cut -d ' ' -f 2 | cut -d ':' -f 2)
-
     - name: docker build
       run: docker build . --file Dockerfile --tag image:${{ steps.vars.outputs.alpine_version }}
+    
+  dockerscan:
+    name: image security scan
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: docker build
+      run: docker build . --file Dockerfile --tag image
+    - name: cached scan db
+      uses: actions/cache@preview
+      with:
+        path: vulndb/
+        key: ${{ runner.os }}-vulndb
+    - name: run security scan
+      run: docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v vulndb/:/root/.cache/ aquasec/trivy image
+
+
