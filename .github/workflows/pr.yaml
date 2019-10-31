@@ -41,7 +41,7 @@ jobs:
         docker run --rm \
           -v /var/run/docker.sock:/var/run/docker.sock \
           -v "$(pwd)/vulndb/":/root/.cache/ \
-          aquasec/trivy --severity HIGH,CRITICAL,MEDIUM --ignore-unfixed --exit-code 1 --cache-dir /root/.cache/ image
-        rm vulndb/trivy
+          aquasec/trivy --severity HIGH,CRITICAL,MEDIUM --no-progress --auto-refresh --ignore-unfixed --exit-code 1 --cache-dir /root/.cache/ image
+
 
 
