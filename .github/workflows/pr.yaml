@@ -25,7 +25,7 @@ jobs:
       run: docker build . --file Dockerfile --tag image:${{ steps.vars.outputs.alpine_version }}
     
   dockerscan:
-    name: image security scan
+    name: docker security scan
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
@@ -37,12 +37,11 @@ jobs:
         path: vulndb/
         key: trivy-vulndb
     - name: run security scan
+      env:
+        DISTRO: alpine
       run: |
         docker run --rm \
           -v /var/run/docker.sock:/var/run/docker.sock \
           -v "$(pwd)/vulndb/":/root/.cache/ \
-          aquasec/trivy --severity HIGH,CRITICAL,MEDIUM --no-progress --auto-refresh --ignore-unfixed --exit-code 1 --cache-dir /root/.cache/ image
+          aquasec/trivy --severity HIGH,CRITICAL,MEDIUM --no-progress --auto-refresh --only-update $DISTRO --ignore-unfixed --exit-code 1 --cache-dir /root/.cache/ image
         docker run --rm -v "$(pwd)/vulndb/":/root/.cache/ alpine:latest chmod 777 -R /root/.cache/
-
-
-
