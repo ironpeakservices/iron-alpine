@@ -1,4 +1,4 @@
-FROM ironpeakservices/hardened-alpine
+FROM docker.pkg.github.com/ironpeakservices/iron-alpine/iron-alpine:3.10.3
 RUN apk add --no-cache nginx \
   && rm -rf /etc/nginx /var/cache/nginx /var/log/nginx
 
