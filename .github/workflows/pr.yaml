@@ -23,7 +23,14 @@ jobs:
       run: echo ::set-output name=alpine_version::$(grep '^FROM alpine' Dockerfile  | cut -d ' ' -f 2 | cut -d ':' -f 2)
     - name: docker build
       run: docker build . --file Dockerfile --tag image:${{ steps.vars.outputs.alpine_version }}
-    
+    - name: save docker image for cache
+      run: mkdir -p image/ && docker save -o image/image.tar image:${{ steps.vars.outputs.redis_version }}
+    - name: cache docker image
+      uses: actions/cache@v1
+      with:
+        path: image/
+        key: ${{ runner.os }}-docker-${{ github.sha }}
+
   dockerscan:
     name: docker security scan
     runs-on: ubuntu-latest
