@@ -24,7 +24,7 @@ jobs:
     - name: docker build
       run: docker build . --file Dockerfile --tag image:${{ steps.vars.outputs.alpine_version }}
     - name: save docker image for cache
-      run: mkdir -p image/ && docker save -o image/image.tar image:${{ steps.vars.outputs.redis_version }}
+      run: mkdir -p image/ && docker save -o image/image.tar image:${{ steps.vars.outputs.alpine_version }}
     - name: cache docker image
       uses: actions/cache@v1
       with:
