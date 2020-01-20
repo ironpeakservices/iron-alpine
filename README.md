@@ -1,4 +1,4 @@
-# ironpeakservices/hardened-alpine
+# ironpeakservices/iron-alpine
 Hardened alpine linux baseimage for Docker.
 
 Note: If you use Golang, build statically and use [iron-scratch](https://github.com/ironpeakservices/iron-scratch).
