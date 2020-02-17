@@ -2,6 +2,8 @@ on:
   push:
     branches:
     - master
+    tags:
+    - '**'
 
 name: push image
 jobs:
