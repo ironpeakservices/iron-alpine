@@ -4,7 +4,7 @@ on:
     branches-ignore:
       - '**'
     tags:
-      - 'v*'
+      - '**'
 jobs:
   update-semver:
     runs-on: ubuntu-latest
