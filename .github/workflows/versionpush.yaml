@@ -1,10 +1,10 @@
-name: Update Semver
+name: Create upstream version
 on:
   push:
     branches-ignore:
       - '**'
     tags:
-      - 'v*.*.*'
+      - 'v*'
 jobs:
   update-semver:
     runs-on: ubuntu-latest
