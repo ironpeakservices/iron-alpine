@@ -24,11 +24,9 @@ jobs:
         username: hazcod
         password: ${{ secrets.GITHUB_TOKEN }}
     - name: Create GitHub release
-      uses: actions/create-release@v1
+      uses: sondreb/action-release@master
       with:
-          tag_name: ${{ steps.vars.outputs.alpine_version }}
-          release_name: iron-alpine
-          draft: false
-          prerelease: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        draft: false
+        prerelease: false
+        tag: ${{ steps.vars.outputs.alpine_version }}
