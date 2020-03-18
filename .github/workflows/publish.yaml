@@ -16,13 +16,19 @@ jobs:
       id: vars
       run: echo ::set-output name=alpine_version::$(grep '^FROM alpine' Dockerfile  | cut -d ' ' -f 2 | cut -d ':' -f 2)
     - run: echo "Pushing version ${{ steps.vars.outputs.alpine_version }}"
-    - name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@2.12
+    - name: Docker Login
+      uses: azure/docker-login@v1
       with:
-        registry: docker.pkg.github.com
-        name: "ironpeakservices/iron-alpine/iron-alpine:${{ steps.vars.outputs.alpine_version }}"
+        login-server: docker.pkg.github.com
         username: hazcod
         password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Build & Push image
+      run: |
+        export IMAGENAME="docker.pkg.github.com/ironpeakservices/iron-alpine/iron-alpine:${{ steps.vars.outputs.alpine_version }}"
+        docker build --tag "$IMAGENAME" .
+        docker create --name image "$IMAGENAME"
+        docker export image | docker import - "$IMAGENAME"
+        docker push "$IMAGENAME"
     - name: Create GitHub release
       uses: sondreb/action-release@master
       with:
