@@ -1,4 +1,4 @@
-FROM alpine:3.11.3
+FROM alpine:3.11.5
 
 # make a pipe fail on the first failure
 SHELL ["/bin/sh", "-o", "pipefail", "-c"]
