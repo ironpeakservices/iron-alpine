@@ -17,7 +17,7 @@ jobs:
       run: echo ::set-output name=alpine_version::$(grep '^FROM alpine' Dockerfile  | cut -d ' ' -f 2 | cut -d ':' -f 2)
     - run: echo "Pushing version ${{ steps.vars.outputs.alpine_version }}"
     - name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@2.17
+      uses: elgohr/Publish-Docker-Github-Action@2.18
       with:
         registry: docker.pkg.github.com	
         name: "ironpeakservices/iron-alpine/iron-alpine:${{ steps.vars.outputs.alpine_version }}"
