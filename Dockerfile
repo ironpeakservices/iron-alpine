@@ -33,7 +33,7 @@ RUN rm -fr /var/spool/cron \
 
 # Remove all but a handful of admin commands.
 RUN find /sbin /usr/sbin \
-  ! -type d -a ! -name apk -a ! -name ln \
+  ! -type d -a ! -name apk -a ! -name ln -a ! -name chown \
   -delete
 
 # Remove world-writeable permissions except for /tmp/
