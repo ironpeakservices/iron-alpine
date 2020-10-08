@@ -33,7 +33,7 @@ RUN rm -fr /var/spool/cron \
 
 # Remove all but a handful of admin commands.
 RUN find /sbin /usr/sbin \
-  ! -type d -a ! -name apk -a ! -name ln -a ! -name chown \
+  ! -type d -a ! -name apk -a ! -name ln \
   -delete
 
 # Remove world-writeable permissions except for /tmp/
@@ -73,7 +73,6 @@ RUN find /bin /etc /lib /sbin /usr -xdev -type f -a \( -perm +4000 -o -perm +200
 RUN find /bin /etc /lib /sbin /usr -xdev \( \
   -name hexdump -o \
   -name chgrp -o \
-  -name chown -o \
   -name ln -o \
   -name od -o \
   -name strings -o \
