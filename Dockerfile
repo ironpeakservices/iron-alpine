@@ -71,13 +71,13 @@ RUN find /bin /etc /lib /sbin /usr -xdev -type f -a \( -perm +4000 -o -perm +200
 
 # Remove dangerous commands
 RUN find /bin /etc /lib /sbin /usr -xdev \( \
-  -name hexdump -o \
-  -name chgrp -o \
-  -name ln -o \
-  -name od -o \
-  -name strings -o \
-  -name su \
-  -name sudo \
+  -iname hexdump -o \
+  -iname chgrp -o \
+  -iname ln -o \
+  -iname od -o \
+  -iname strings -o \
+  -iname su -o \
+  -iname sudo \
   \) -delete
 
 # Remove init scripts since we do not use them.
