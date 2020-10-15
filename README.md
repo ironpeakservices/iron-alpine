@@ -4,7 +4,7 @@ Hardened alpine linux baseimage for Docker.
 Note: If you use Golang, build statically and use [iron-scratch](https://github.com/ironpeakservices/iron-scratch).
 If you are using Java/Python/NodeJS/dotnet, use a [distroless image](https://github.com/GoogleContainerTools/distroless) instead.
 
-`docker pull docker.pkg.github.com/ironpeakservices/iron-alpine/iron-alpine:3.10.3`
+`docker pull ghcr.io/ironpeakservices/iron-alpine:1.0.0`
 
 ## How is this different?
 - ca-certificates included
@@ -25,7 +25,7 @@ If you are using Java/Python/NodeJS/dotnet, use a [distroless image](https://git
 	- sets permissions on /app after installation
 
 ## Example
-`docker pull ironpeakservices/hardened-alpine`
+`docker pull ghcr.io/ironpeakservices/iron-alpine:1.0.0`
 
 See [the nginx example](example/).
 

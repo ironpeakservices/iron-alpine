@@ -1,0 +1,39 @@
+
+on:
+  push:
+    branches:
+    - master
+
+name: Publish Image
+jobs:
+  dockerpush:
+    name: docker build
+    runs-on: ubuntu-latest
+    steps:
+    - 
+      uses: actions/checkout@v2.0.0
+    - 
+      uses: go-semantic-release/action@v1
+      id: version
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+    - 
+      run: echo "Pushing version ${{ steps.version.outputs.version }}"
+    - 
+      name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@2.22
+      with:
+        registry: ghcr.io
+        name: "ghcr.io/ironpeakservices/iron-alpine:${{ steps.version.outputs.version }}"
+        username: hazcod
+        password: ${{ secrets.PACKAGE_TOKEN }}
+    - 
+      name: Create GitHub release
+      uses: actions/create-release@v1.1.4
+      with:
+          tag_name: ${{ steps.version.outputs.version }}
+          release_name: iron-alpine
+          draft: false
+          prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

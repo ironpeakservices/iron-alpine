@@ -1,0 +1,60 @@
+name: Security
+
+on:
+  push:
+    branches: [master]
+  schedule:
+    - cron: '0 11 * * 2'
+    
+jobs:
+  dockerscan:
+    name: Docker Scan
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        uses: actions/checkout@v1
+      - 
+        name: Set env
+        run: echo ::set-env name=RELEASE_VERSION::$(git describe --tags $(git rev-list --tags --max-count=1))
+      -
+         name: Docker login
+         env:
+           USER: hazcod
+           REGISTRY: docker.pkg.github.com
+         run: echo "${{ secrets.PACKAGE_TOKEN }}" | docker login -u "${USER}" --password-stdin "${REGISTRY}"
+      -
+         name: Docker pull
+         run: docker pull "docker.pkg.github.com/ironpeakservices/iron-alpine:${{ env.RELEASE_VERSION }}" 
+      -
+        name: Run vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'docker.pkg.github.com/ironpeakservices/iron-alpine:${{ env.RELEASE_VERSION }}'
+          format: 'template'
+          template: '@/contrib/sarif.tpl'
+          output: 'trivy-results.sarif'
+          ignore-unfixed: true
+          severity: 'CRITICAL,HIGH,MEDIUM'
+      - 
+        name: Upload Trivy scan results to Security tab
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+  goscan:
+    name: Go Scan
+    runs-on: ubuntu-latest
+    steps:
+    - 
+      uses: actions/checkout@v2
+    - 
+      run: git checkout HEAD^2
+      if: ${{ github.event_name == 'pull_request' }}
+    - 
+      name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: go
+    - 
+      name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1
