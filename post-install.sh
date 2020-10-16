@@ -18,8 +18,8 @@ chmod -R u=rwx "$DATA_DIR/"
 # chown all app files
 chown $APP_USER:$APP_USER -R $APP_DIR $DATA_DIR
 
-# remove chown after use
-find / -type f -iname 'chown' -xdev -delete
+# remove chown after use (links & binaries)
+find / \( -type f -o -type l \) -iname 'chown' -xdev -delete
 
 # finally remove this file
 rm "$0"
