@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - 
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2.3.4
       - 
         name: Set env
         run: echo ::set-env name=RELEASE_VERSION::$(git describe --tags $(git rev-list --tags --max-count=1))
@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - 
-      uses: actions/checkout@v2
+      uses: actions/checkout@v2.3.4
     - 
       run: git checkout HEAD^2
       if: ${{ github.event_name == 'pull_request' }}
