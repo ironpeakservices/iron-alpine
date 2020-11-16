@@ -21,7 +21,7 @@ jobs:
       run: echo "Pushing version ${{ steps.version.outputs.version }}"
     - 
       name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@2.22
+      uses: elgohr/Publish-Docker-Github-Action@3.01
       with:
         registry: ghcr.io
         name: "ghcr.io/ironpeakservices/iron-alpine:${{ steps.version.outputs.version }}"
