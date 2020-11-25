@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - 
-      uses: actions/checkout@v2.0.0
+      uses: actions/checkout@v2.3.4
     - 
       uses: go-semantic-release/action@v1
       id: version
@@ -21,7 +21,7 @@ jobs:
       run: echo "Pushing version ${{ steps.version.outputs.version }}"
     - 
       name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@2.22
+      uses: elgohr/Publish-Docker-Github-Action@3.01
       with:
         registry: ghcr.io
         name: "ghcr.io/ironpeakservices/iron-alpine:${{ steps.version.outputs.version }}"
