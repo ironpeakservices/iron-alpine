@@ -23,7 +23,7 @@ jobs:
       with:
         registry: ghcr.io
         name: "ghcr.io/ironpeakservices/iron-alpine:${{ steps.vars.outputs.alpine_version }}"
-        username: hazcod
+        username: ${{ github.actor }}
         password: ${{ secrets.PACKAGE_TOKEN }}
     - 
       name: Create GitHub release
