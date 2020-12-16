@@ -19,7 +19,7 @@ jobs:
         echo "Using alpine version ${{ steps.vars.outputs.alpine_version }}"
     - 
       name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@3.01
+      uses: elgohr/Publish-Docker-Github-Action@3.02
       with:
         registry: ghcr.io
         name: "ghcr.io/ironpeakservices/iron-alpine:${{ steps.vars.outputs.alpine_version }}"
