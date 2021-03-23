@@ -32,7 +32,7 @@ jobs:
         name: Run vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'docker.pkg.github.com/ironpeakservices/iron-alpine:${{ steps.vars.outputs.RELEASE_VERSION }}'
+          image-ref: 'ghcr.io/ironpeakservices/iron-alpine/iron-alpine:${{ steps.vars.outputs.RELEASE_VERSION }}'
           format: 'template'
           template: '@/contrib/sarif.tpl'
           output: 'trivy-results.sarif'
