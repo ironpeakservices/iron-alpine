@@ -9,7 +9,12 @@ jobs:
     steps:
     - 
       uses: actions/checkout@v2.3.4
-    - 
+      with:
+        fetch-depth: 0
+    - name: Set env
+      id: vars
+      run: echo ::set-output name=RELEASE_VERSION::$(git describe --match "[0-9]*.[0-9]*.[0-9]*" --tags $(git rev-list --tags --max-count=1))
+    -
       id: vars
       run: |
         echo ::set-output name=alpine_version::$(grep '^FROM alpine' Dockerfile | cut -d ' ' -f 2 | cut -d ':' -f 2)
@@ -25,6 +30,7 @@ jobs:
     - 
       name: Create GitHub release
       uses: actions/create-release@v1.1.4
+      if: steps.vars.outputs.alpine_version != steps.vars.outputs.RELEASE_VERSION
       with:
           tag_name: ${{ steps.vars.outputs.alpine_version }}
           release_name: iron-alpine
