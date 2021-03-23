@@ -1,13 +1,10 @@
-
 on:
   push:
-    branches:
-    - master
+    branches: [master]
 
-name: Publish Image
 jobs:
+
   dockerpush:
-    name: docker build
     runs-on: ubuntu-latest
     steps:
     - 
@@ -16,15 +13,15 @@ jobs:
       id: vars
       run: |
         echo ::set-output name=alpine_version::$(grep '^FROM alpine' Dockerfile | cut -d ' ' -f 2 | cut -d ':' -f 2)
-        echo "Using alpine version ${{ steps.vars.outputs.alpine_version }}"
     - 
       name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@3.01
+      uses: elgohr/Publish-Docker-Github-Action@3.02
       with:
         registry: ghcr.io
-        name: "ghcr.io/ironpeakservices/iron-alpine:${{ steps.vars.outputs.alpine_version }}"
-        username: ${{ github.actor }}
+        name: "ghcr.io/ironpeakservices/iron-alpine/iron-alpine:${{ steps.vars.outputs.alpine_version }}"
+        username: hazcod
         password: ${{ secrets.PACKAGE_TOKEN }}
+        tag_semver: true
     - 
       name: Create GitHub release
       uses: actions/create-release@v1.1.4
