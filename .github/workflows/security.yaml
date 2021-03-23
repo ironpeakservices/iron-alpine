@@ -23,11 +23,11 @@ jobs:
         name: Docker login
         env:
             USER: hazcod
-            REGISTRY: docker.pkg.github.com
+            REGISTRY: ghcr.io
         run: echo "${{ secrets.PACKAGE_TOKEN }}" | docker login -u "${USER}" --password-stdin "${REGISTRY}"
       -
          name: Docker pull
-         run: docker pull "docker.pkg.github.com/ironpeakservices/iron-alpine:${{ steps.vars.outputs.RELEASE_VERSION }}" 
+         run: docker pull "ghcr.io/ironpeakservices/iron-alpine/iron-alpine:${{ steps.vars.outputs.RELEASE_VERSION }}"
       -
         name: Run vulnerability scanner
         uses: aquasecurity/trivy-action@master
