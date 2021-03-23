@@ -35,12 +35,3 @@ jobs:
           prerelease: false
       env:
         GITHUB_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
-
-        args: MyReleaseMessage
-      with:
-          tag_name: ${{ steps.vars.outputs.alpine_version }}
-          release_name: iron-alpine
-          draft: false
-          prerelease: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
