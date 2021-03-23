@@ -1,5 +1,7 @@
 FROM alpine:3.13.2
 
+LABEL org.opencontainers.image.source https://github.com/ironpeakservices/hazcod
+
 # make a pipe fail on the first failure
 SHELL ["/bin/sh", "-o", "pipefail", "-c"]
 
