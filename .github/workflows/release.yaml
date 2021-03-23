@@ -30,7 +30,7 @@ jobs:
     - 
       name: Create GitHub release
       uses: actions/create-release@v1.1.4
-      if: ${{steps.vars.outputs.alpine_version != steps.vars.outputs.RELEASE_VERSION}}
+      if: steps.vars.outputs.alpine_version != steps.vars.outputs.RELEASE_VERSION
       with:
           tag_name: ${{ steps.vars.outputs.alpine_version }}
           release_name: iron-alpine
