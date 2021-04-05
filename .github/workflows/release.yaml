@@ -20,7 +20,7 @@ jobs:
         echo ::set-output name=alpine_version::$(grep '^FROM alpine' Dockerfile | cut -d ' ' -f 2 | cut -d ':' -f 2)
     - 
       name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@3.02
+      uses: elgohr/Publish-Docker-Github-Action@3.03
       with:
         registry: ghcr.io
         name: "ghcr.io/ironpeakservices/iron-alpine/iron-alpine:${{ steps.vars.outputs.alpine_version }}"
