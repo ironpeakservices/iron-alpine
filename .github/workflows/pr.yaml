@@ -60,11 +60,3 @@ jobs:
     - name: Scan
       run: ./trivy --exit-code 1 --no-progress --severity HIGH,CRITICAL,MEDIUM --cache-dir vulndb/ image:${{ steps.vars.outputs.alpine_version }}
 
-  approve:
-    name: Dependabot PR Auto-approve
-    if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
-    runs-on: ubuntu-latest
-    steps:
-    - uses: hmarr/auto-approve-action@v2.1.0
-      with:
-        github-token: "${{ secrets.GITHUB_TOKEN }}"
