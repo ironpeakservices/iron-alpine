@@ -8,7 +8,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2.3.4
     - name: hadolint
-      uses: burdzwastaken/hadolint-action@1.10.0
+      uses: burdzwastaken/hadolint-action@1.14.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         HADOLINT_ACTION_DOCKERFILE_FOLDER: .
@@ -26,7 +26,7 @@ jobs:
     - name: save docker image for cache
       run: mkdir -p image/ && docker save -o image/image.tar image:${{ steps.vars.outputs.alpine_version }}
     - name: cache docker image
-      uses: actions/cache@v2.1.4
+      uses: actions/cache@v2.1.5
       with:
         path: image/
         key: ${{ runner.os }}-docker-${{ github.sha }}
@@ -41,14 +41,14 @@ jobs:
       id: vars
       run: echo ::set-output name=alpine_version::$(grep '^FROM alpine' Dockerfile  | cut -d ' ' -f 2 | cut -d ':' -f 2)
     - name: load cached docker image
-      uses: actions/cache@v2.1.4
+      uses: actions/cache@v2.1.5
       with:
         path: image/
         key: ${{ runner.os }}-docker-${{ github.sha }}
     - name: load cached docker container
       run: docker load -i image/image.tar
     - name: cached scan db
-      uses: actions/cache@v2.1.4
+      uses: actions/cache@v2.1.5
       with:
         path: vulndb/
         key: trivy-vulndb
