@@ -6,7 +6,7 @@ jobs:
     name: dockerfile lint
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2.3.4
+    - uses: actions/checkout@v2.3.5
     - name: hadolint
       uses: burdzwastaken/hadolint-action@1.14.0
       env:
@@ -17,7 +17,7 @@ jobs:
     name: docker build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2.3.4
+    - uses: actions/checkout@v2.3.5
     - name: extract tag
       id: vars
       run: echo ::set-output name=alpine_version::$(grep '^FROM alpine' Dockerfile  | cut -d ' ' -f 2 | cut -d ':' -f 2)
@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: dockerbuild
     steps:
-    - uses: actions/checkout@v2.3.4
+    - uses: actions/checkout@v2.3.5
     - name: extract tag
       id: vars
       run: echo ::set-output name=alpine_version::$(grep '^FROM alpine' Dockerfile  | cut -d ' ' -f 2 | cut -d ':' -f 2)
