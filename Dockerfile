@@ -1,4 +1,4 @@
-FROM alpine:3.17.2
+FROM alpine:3.20.0
 
 LABEL org.opencontainers.image.source="https://github.com/ironpeakservices/iron-alpine"
 
